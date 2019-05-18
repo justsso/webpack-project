@@ -4,7 +4,10 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 //单页 多页  服务端
 
 module.exports = (env, argv) => ({
-    entry: './src/index.js',
+    entry: {
+        app: ['./src/index.js', './public/index.html'],
+        vendor: ['react']
+    },
     output: {
         path: path.join(__dirname, "build"),
         filename: "[name].[hash].js"
@@ -30,6 +33,10 @@ module.exports = (env, argv) => ({
                     'file-loader'
                 ]
             },
+            {
+                test: /\.(html)$/,
+                use: ['html-loader']
+            }
         ]
     },
     plugins: [
