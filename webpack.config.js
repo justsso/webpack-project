@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-//单页 多页  服务端
+//单页 多页  服务端 不同的配置
 
 module.exports = (env, argv) => ({
     entry: {
