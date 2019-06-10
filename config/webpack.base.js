@@ -1,23 +1,25 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const NODE_ENV = process.env.NODE_ENV;
 
-//单页 多页  服务端 不同的配置
-module.exports = (env, argv) => ({
+
+module.exports = {
     entry: {
-        app: ['./src/index.js', './public/index.html'],
+        app: [path.join(__dirname + './../src/index.js')],
         vendor: ['react']
     },
     output: {
-        path: path.join(__dirname, "build"),
-        filename: "[name].[hash].js"
+        path: path.join(__dirname, "../build")
     },
     module: {
         rules: [
             {
                 test: /\.js$/,
-                use: {loader: "babel-loader", options: {presets: ["@babel/preset-env", "@babel/preset-react"]}}
+                use: {
+                    loader: "babel-loader", options: {
+                        presets: ["@babel/preset-env", "@babel/preset-react"]
+                    }
+                }
             },
             {
                 test: /\.less$/,
@@ -42,7 +44,7 @@ module.exports = (env, argv) => ({
     },
     plugins: [
         new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({template: path.join(__dirname, "public/index.html")})
+        new HtmlWebpackPlugin({template: path.join(__dirname, "../public/index.html")})
     ],
     devServer: {
         port: 3100,
@@ -51,4 +53,4 @@ module.exports = (env, argv) => ({
         contentBase: './build'
     },
     devtool: "inline-source-map"
-});
+};
